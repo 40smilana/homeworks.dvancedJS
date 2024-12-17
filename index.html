@@ -121,6 +121,8 @@
           const index = likeButtons.dataset.index;
           const comment = comments[index];
 
+          console.log("click like button");
+
           if (comments.likes = comment.liked) {
             comment.likes--;
           } else {
@@ -130,11 +132,7 @@
 
           renderFunction();
         });
-
       };
-
-      //test
-
     };
     renderFunction();
 
