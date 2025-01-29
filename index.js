@@ -1,6 +1,12 @@
 import { createComment } from './modules/listener_writeButton.js'
 import { renderFunction } from './modules/сomment_rendering_function.js'
 import { likeButtonFunction } from './modules/listener_likeButton.js'
-renderFunction()
+import { fetchComments } from './modules/testapi.js'
+import { updComments } from './modules/comments_array.js'
+fetchComments().then((data) => {
+    updComments(data)
+    renderFunction()
+})
+//renderFunction()
 createComment(renderFunction)
 likeButtonFunction(renderFunction)

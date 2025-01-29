@@ -12,7 +12,7 @@ export const renderFunction = () => {
         <li class="comment" data-index="${index}">
           <div class="comment-header">
             <div>${comment.name}</div>
-            <div>${comment.date.toLocaleDateString()}</div>
+            <div>${comment.date}</div>
           </div>
           <div class="comment-body">
             <div class="comment-text">

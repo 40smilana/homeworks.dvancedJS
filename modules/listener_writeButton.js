@@ -1,6 +1,7 @@
-import { comments } from './comments_array.js'
+import { updComments } from './comments_array.js'
 import { inputComment } from './listener_inputComment.js'
 import { inputName } from './listener_inputName.js'
+import { postComment } from './testapi.js'
 
 export const createComment = (renderFunction) => {
     const writeButton = document.getElementById('write_button')
@@ -23,7 +24,7 @@ export const createComment = (renderFunction) => {
         }
 
         //В шаблонную строку комментария подставляем значения полей имени и комментария, Обработка HTML-разметки replaceAll
-        const userComment = {
+        /* const userComment = {
             name: inputName.value
                 .replaceAll('<', '&lt;')
                 .replaceAll('>', '&gt;'),
@@ -32,13 +33,17 @@ export const createComment = (renderFunction) => {
                 .replaceAll('<', '&lt;')
                 .replaceAll('>', '&gt;'),
             likes: 0,
-        }
+        } */
 
-        inputName.value = ''
-        inputComment.value = ''
+        postComment(inputName.value, inputComment.value).then((data) => {
+            updComments(data)
+            renderFunction()
+            inputName.value = ''
+            inputComment.value = ''
+        })
 
-        comments.push(userComment)
+        //comments.push(userComment)
 
-        renderFunction()
+        //renderFunction()
     })
 }

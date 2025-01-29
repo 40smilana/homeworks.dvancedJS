@@ -1,6 +1,6 @@
 //массив
-export const comments = [
-    {
+export let comments = [
+    /* {
         name: 'Глеб Фокин',
         date: new Date(),
         text: 'Это будет первый комментарий на этой странице',
@@ -13,5 +13,9 @@ export const comments = [
         text: 'Мне нравится как оформлена эта страница! ❤',
         likes: 75,
         liked: true,
-    },
+    }, */
 ]
+
+export const updComments = (newComments) => {
+    comments = newComments
+}
