@@ -1,0 +1,127 @@
+//массив
+const comments = [
+    {
+        name: 'Глеб Фокин',
+        date: new Date(),
+        text: 'Это будет первый комментарий на этой странице',
+        likes: 3,
+        likedIt: false,
+    },
+    {
+        name: 'Варвара Н.',
+        date: new Date(),
+        text: 'Мне нравится как оформлена эта страница! ❤',
+        likes: 75,
+        liked: true,
+    },
+]
+
+//По клику на кнопку «Добавить» создаем шаблонную строку комментария с помощью обратных кавычек
+const renderFunction = () => {
+    const list = document.querySelector('.comments')
+
+    list.innerHTML = comments
+        .map((comment, index) => {
+            return `
+      <li class="comment" data-index="${index}">
+        <div class="comment-header">
+          <div>${comment.name}</div>
+          <div>${comment.date.toLocaleDateString()}</div>
+        </div>
+        <div class="comment-body">
+          <div class="comment-text">
+            ${comment.text}
+          </div>
+        </div>
+        <div class="comment-footer">
+          <div class="likes">
+            <span class="likes-counter">${comment.likes}</span>
+            <button data-index="${index}" class="like-button ${comment.liked ? '-active-like' : ''}"></button>
+          </div>
+        </div>
+      </li>
+      `
+        })
+        .join('')
+
+    //Добавьте обработчик клика на лайк
+    const likeButton = document.querySelectorAll('.like-button')
+
+    for (const likeButtons of likeButton) {
+        likeButtons.addEventListener('click', (no) => {
+            console.log('click like button')
+
+            const index = likeButtons.dataset.index
+            const comment = comments[index]
+
+            //При клике на иконку лайка цитирование комментария не должно происходить
+            no.stopPropagation()
+
+            if ((comments.likes = comment.liked)) {
+                comment.likes--
+            } else {
+                comment.likes++
+            }
+            comment.liked = !comment.liked
+
+            renderFunction()
+        })
+    }
+
+    //В поле ввода автоматически добавляется текст этого комментария и имя автора.
+    const allCommentsEl = document.querySelectorAll('.comment')
+
+    for (const allCommentEl of allCommentsEl) {
+        allCommentEl.addEventListener('click', () => {
+            const thisComment = comments[allCommentEl.dataset.index]
+            inputComment.value = `❮❮ ${thisComment.name}: ${thisComment.text} ❯❯`
+        })
+    }
+}
+renderFunction()
+
+//переменные имя, текст комментария и кнопки "написать"
+const inputName = document.getElementById('input_name')
+const inputComment = document.getElementById('input_comment')
+const writeButton = document.getElementById('write_button')
+
+//Добавляем обработчик события на изменения полей ввода «Имя» и «Комментарий»
+//Добавляем обработчик события на нажатие кнопки «Добавить»
+inputName.addEventListener('input', () => {
+    console.log('change inputName')
+})
+
+inputComment.addEventListener('input', () => {
+    console.log('change inputComment')
+})
+
+writeButton.addEventListener('click', () => {
+    console.log('click write button')
+
+    //Нельзя оставить поля комментария и имени пустыми
+    inputName.classList.remove('error')
+    inputComment.classList.remove('error')
+
+    if (inputName.value === '' && inputComment.value === '') {
+        inputName.classList.add('error')
+        inputComment.classList.add('error')
+        return
+    }
+
+    //В шаблонную строку комментария подставляем значения полей имени и комментария, Обработка HTML-разметки replaceAll
+    const userComment = {
+        name: inputName.value.replaceAll('<', '&lt;').replaceAll('>', '&gt;'),
+        date: new Date(),
+        text: inputComment.value
+            .replaceAll('<', '&lt;')
+            .replaceAll('>', '&gt;'),
+        likes: 0,
+    }
+
+    inputName.value = ''
+    inputComment.value = ''
+
+    comments.push(userComment)
+
+    renderFunction()
+})
