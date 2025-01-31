@@ -139,3 +139,8 @@ body {
   .error {
     border: 2px solid rgb(242, 10, 10);
   }
+
+  .loader-form {
+    display: none;
+    margin-top: 20px;
+  }

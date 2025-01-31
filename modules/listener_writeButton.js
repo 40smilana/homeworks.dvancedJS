@@ -1,4 +1,5 @@
 import { updComments } from './comments_array.js'
+import { newCommentLoader } from './comments_loader.js'
 import { inputComment } from './listener_inputComment.js'
 import { inputName } from './listener_inputName.js'
 import { postComment } from './testapi.js'
@@ -35,7 +36,14 @@ export const createComment = (renderFunction) => {
             likes: 0,
         } */
 
+        newCommentLoader()
+
         postComment(inputName.value, inputComment.value).then((data) => {
+            const findForm = document.querySelector('.loader-form')
+            findForm.style.display = 'none'
+
+            const addForm = document.querySelector('.add-form')
+            addForm.style.display = 'flex'
             updComments(data)
             renderFunction()
             inputName.value = ''
