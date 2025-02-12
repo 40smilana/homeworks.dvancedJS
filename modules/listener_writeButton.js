@@ -38,7 +38,8 @@ export const createComment = (renderFunction) => {
 
         newCommentLoader()
 
-        postComment(inputName.value, inputComment.value).then((data) => {
+        postComment(inputName.value, inputComment.value)
+        .then((data) => {
             const findForm = document.querySelector('.loader-form')
             findForm.style.display = 'none'
 
@@ -49,6 +50,7 @@ export const createComment = (renderFunction) => {
             inputName.value = ''
             inputComment.value = ''
         })
+        
 
         //comments.push(userComment)
 
