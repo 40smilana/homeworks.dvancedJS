@@ -1,30 +1,42 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
+    <head>
+        <title>Проект "Комменты"</title>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="styles.css" />
+    </head>
 
-<head>
-  <title>Проект "Комменты"</title>
-  <meta charset="utf-8" />
-  <link rel="stylesheet" href="styles.css" />
-</head>
+    <body>
+        <div class="container">
+            <ul class="comments"></ul>
+            <div class="add-form">
+                <input
+                    type="text"
+                    class="add-form-name"
+                    id="input_name"
+                    placeholder="Введите ваше имя"
+                />
+                <textarea
+                    type="textarea"
+                    class="add-form-text"
+                    id="input_comment"
+                    placeholder="Введите ваш коментарий"
+                    rows="4"
+                ></textarea>
+                <div class="add-form-row">
+                    <button class="add-form-button" id="write_button">
+                        Написать
+                    </button>
+                </div>
+            </div>
+            <div class="loader-form">Комментарий добавляется...</div>
+        </div>
+        
 
-<body>
-  <div class="container">
-    <ul class="comments">
-    </ul>
-    <div class="add-form">
-      <input type="text" class="add-form-name" id="input_name" placeholder="Введите ваше имя" />
-      <textarea type="textarea" class="add-form-text" id="input_comment" placeholder="Введите ваш коментарий"
-        rows="4"></textarea>
-      <div class="add-form-row">
-        <button class="add-form-button" id="write_button">Написать</button>
-      </div>
-    </div>
-  </div>
-  <!-- <script type="module" src="./script.js"></script> -->
-  <script type="module" src="./index.js"></script>
-</body>
+        <script type="module" src="./index.js"></script>
+    </body>
 
-<!-- <script>
+    <!-- <script>
   //массив
   const comments = [
 
@@ -153,5 +165,4 @@
     renderFunction();
   });
 </script> -->
-
 </html>

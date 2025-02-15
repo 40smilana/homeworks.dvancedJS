@@ -26,7 +26,47 @@ export const postComment = (name, text) => {
             text: text.replaceAll('<', '&lt;').replaceAll('>', '&gt;'),
             name: name.replaceAll('<', '&lt;').replaceAll('>', '&gt;'),
         }),
-    }).then(() => {
+    })
+    .then ((response) => {
+        if (response.status === 201) {
+            return response.json()
+        } else {
+            if (response.status === 500) {
+                throw new Error('Сервер сломался, попробуй позже')
+            }
+            if (response.status === 400) {
+                throw new Error('Имя и комментарий должны быть не короче 3-х символов')
+            }
+            if (response.status === 404) {
+                throw new Error('Не найдено')
+            }
+                throw new Error('Проверь подключение к интернету')
+        }
+        
+    })
+    .then(() => {
         return fetchComments()
     })
+    .catch((error) => {
+
+        if (error.message === 'Сервер сломался, попробуй позже') {
+            alert(error.message)
+        }
+        
+        if (error.message === 'Имя и комментарий должны быть не короче 3-х символов') {
+            alert(error.message)
+        }
+
+        if (error.message === 'Не найдено') {
+            alert(error.message)
+        }
+
+        if (error.message === 'Failed to fetch') {
+            alert('Проверьте подключение к интернету и попробуйте снова')
+        }
+        
+    })
+    /* .finally (() => {
+
+    }) */
 }
